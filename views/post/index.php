@@ -1,7 +1,7 @@
 <?php
-
 use App\Helpers\Text;
 use App\Model\Post;
+require '../vendor/autoload.php';
 
 $title= 'The blog';
 
@@ -17,14 +17,7 @@ $posts= $query->fetchAll(PDO::FETCH_CLASS, Post::class);
 <div class="row">
 	<?php foreach ($posts as $post): ?>
 	<div class="col-md-3">
-		<div class="card">
-			<div class="card-body">
-			    <h5 class="card-title"><?= htmlentities($post->getName()) ?></h5>
-			    <p class="txt-muted"><?= $post->getCreatedAt()->format('d F Y H:i') ?></p>
-			    <p class="p-content"><?= $post->getExcerpt() ?></p>
-			    <p><a href="<?php url('post?, 'id>=> " class="btn url">Read more</a></p>
-			</div>
-		</div>
+		<?php require 'card.php' ?>
 	</div>
 	<?php endforeach ?>
 </div>

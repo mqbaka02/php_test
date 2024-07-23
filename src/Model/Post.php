@@ -6,6 +6,7 @@ use \DateTime;
 class Post {
 
 	private $id;
+	private $slug;
 	private $name;
 	private $content;
 	private $created_at;
@@ -25,5 +26,13 @@ class Post {
 		} else {
 			return nl2br(htmlentities(Text::excerpt($this->content, 60)));
 		}
+	}
+
+	public function getSlug(): ?string {
+		return $this->slug;
+	}
+
+	public function getID(): ?int {
+		return $this->id;
 	}
 }

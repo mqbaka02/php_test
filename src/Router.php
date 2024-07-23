@@ -24,9 +24,14 @@ class Router {
 		return $this;
 	}
 
+	public function url(?string $name, array $params=[]) {
+		return $this->router->generate($name, $params);
+	}
+
 	public function run() {
 		$match= $this->router->match();
 		$view= $match['target'];
+		$router= $this;
 		ob_start();
 		require $this->view_path . DIRECTORY_SEPARATOR . $view . '.php';
 		$content= ob_get_clean();
