@@ -30,7 +30,10 @@ class Router {
 
 	public function run() {
 		$match= $this->router->match();
+		// dd($match);
+		// dd($this->router->match());
 		$view= $match['target'];
+		// dd($view);
 		$router= $this;
 		ob_start();
 		require $this->view_path . DIRECTORY_SEPARATOR . $view . '.php';

@@ -109,3 +109,13 @@ body{
 .p-content+p{
 	margin-top: auto;
 }
+
+.g-flex{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.g-flex .btn.prm#nxt-pg{
+	margin-left: auto;
+}
