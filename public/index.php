@@ -27,6 +27,6 @@ if(isset($_GET['page']) && $_GET['page']== 1){
 $router= new App\Router(dirname(__DIR__) . '/views');
 $router
 	->get('/', 'post/index', 'blog')
-	->get('/blog/[*:slug]-[id]', 'post/show', 'post')
+	->get('/blog/[*:slug]-[i:id]', 'post/show', 'post')
 	->get('/blog/category', 'category/show', 'category')
 	->run();

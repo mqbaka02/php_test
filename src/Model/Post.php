@@ -28,6 +28,10 @@ class Post {
 		}
 	}
 
+	public function getFormattedContent(): ?string {
+		return nl2br(htmlentities($this->content));
+	}
+
 	public function getSlug(): ?string {
 		return $this->slug;
 	}

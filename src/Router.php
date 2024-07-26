@@ -25,14 +25,21 @@ class Router {
 	}
 
 	public function url(?string $name, array $params=[]) {
+		// dd($params);
+		// var_dump2(['id'=>38, 'slug'=>"some-slug"]);
+		// var_dump2($name);
+		// dd($this->router->generate($name, $params));
+		// exit();
 		return $this->router->generate($name, $params);
 	}
 
 	public function run() {
 		$match= $this->router->match();
-		// dd($match);
+		// dd($this->router);
 		// dd($this->router->match());
+		// var_dump($match);
 		$view= $match['target'];
+		$params= $match['params'];
 		// dd($view);
 		$router= $this;
 		ob_start();
@@ -41,4 +48,10 @@ class Router {
 		require $this->view_path . DIRECTORY_SEPARATOR . 'layout/default.php';
 		return $this;
 	}
+}
+
+function var_dump2($somevar){
+	echo '<pre>';
+	var_dump($somevar);
+	echo '</pre>';
 }
