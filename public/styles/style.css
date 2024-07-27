@@ -38,6 +38,9 @@ body{
 	margin: 0 auto;
 	max-width: var(--container-m-width);
 	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
 }
 .bg-lgh{
 	background-color: #eef;
@@ -118,4 +121,19 @@ body{
 
 .g-flex .btn.prm#nxt-pg{
 	margin-left: auto;
+}
+
+.labels{
+	display: flex;
+	flex-direction: row;
+	gap: .3em;
+	font-size: .6em;
+}
+
+.category-label{
+	text-decoration: none;
+	padding: .5em 1em;
+	background: #888;
+	color: #fff;
+	border-radius: 4px;
 }
