@@ -12,6 +12,18 @@ class Post {
 	private $created_at;
 	private $categories;
 
+	/**
+	 * @return Category[]
+	 */
+	public function getCategories(): ?array {
+		return $this->categories;
+	}
+
+	public function addCategory(Category $category): void {
+		$this->categories[]= $category;
+		$category->setPost($this);
+	}
+
 	public function getName(): ?string {
 		return $this->name;
 	}

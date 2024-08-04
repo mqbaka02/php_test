@@ -128,6 +128,7 @@ body{
 	flex-direction: row;
 	gap: .3em;
 	font-size: .6em;
+	flex-wrap: wrap;
 }
 
 .category-label{

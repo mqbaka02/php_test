@@ -50,6 +50,21 @@ $paginatedQuery= new PaginatedQuery(
 $posts= $paginatedQuery->getItems(Post::class);
 // dd($posts);
 
+
+$postsByIds= [];
+foreach ($posts as $post){
+	$postsByIds[$post->getID()]= $post;
+}
+$categories= $pdo->query("SELECT c.*, pc.post_id
+	FROM post_category pc
+	JOIN category c ON c.id = pc.category_id
+	WHERE pc.post_id IN (" . implode(', ', array_keys($postsByIds)) . ")"
+)->fetchAll(PDO::FETCH_CLASS, Category::class);
+
+foreach($categories as $category){
+	$postsByIds[$category->getPostId()]->addCategory($category);
+}
+
 $link= $router->url('category', ['id' => $category->getID(), 'slug' => $category->getSlug()]);
 
 ?>
