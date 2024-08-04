@@ -11,7 +11,7 @@ $whoops->register();
 
 if(isset($_GET['page']) && $_GET['page']== 1){
 	//remove page=1 from the URL
-	$uri= $server['REQUEST_URI'];
+	$uri= $_SERVER['REQUEST_URI'];
 	$uri= explode('?', $uri)[0];
 	$get= $_GET;
 	unset($get['page']);

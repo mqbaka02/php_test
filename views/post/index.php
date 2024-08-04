@@ -3,6 +3,7 @@ use App\Helpers\Text;
 use App\Model\Post;
 use App\Connection;
 use App\URL;
+use App\PaginatedQuery;
 require '../vendor/autoload.php';
 
 $title= 'The blog';
@@ -13,16 +14,12 @@ $currentpage= URL::getPositiveInt('page', 1);
 if($currentpage< 0) {
 	throw new Exception("Wrong page number");
 }
-$count= (int)$pdo->query("SELECT COUNT(id) FROM post")->fetch(PDO::FETCH_NUM)[0];
-$per_page= 12;
-$pages= ceil($count/12);
-if($currentpage> $pages) {
-	throw new Exception("Wrong page number");
-}
 
-$offset= $per_page * ($currentpage - 1);
-$query= $pdo->query("SELECT* FROM post ORDER BY created_at DESC LIMIT " . $per_page . " OFFSET " . $offset);
-$posts= $query->fetchAll(PDO::FETCH_CLASS, Post::class);
+$paginatedQuery= new PaginatedQuery(
+	"SELECT* FROM post ORDER BY created_at DESC",
+	"SELECT COUNT(id) FROM post"
+);
+$posts= $paginatedQuery->getItems(Post::class);
 ?>
 
 <h1>Blog</h1>
@@ -35,12 +32,9 @@ $posts= $query->fetchAll(PDO::FETCH_CLASS, Post::class);
 	<?php endforeach ?>
 </div>
 
-<div class="g-flex">
-	<?php  if($currentpage > 1) : ?>
-	<a href="<?= $router->url('blog') ?>?page=<?= $currentpage - 1?>" class= 'btn prm' ?>&laquo; Previous page</a>
-	<?php endif ?>
-	<?php  if($currentpage < $pages) : ?>
-	<a href="<?= $router->url('blog') ?>?page=<?= $currentpage + 1?>" class= 'btn prm' id="nxt-pg"?>Next page &raquo;</a>
-	<?php endif ?>
+<div class="g-flex bottom">
+	
+	<?= $paginatedQuery->previousLink($router->url('blog')) ?>
+	<?= $paginatedQuery->nextLink($router->url('blog')) ?>
 
 </div>

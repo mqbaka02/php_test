@@ -55,7 +55,7 @@ body{
 	flex-wrap: wrap;
 	gap: 1%;
 	grid-row-gap: 10px;
-	margin: 30px auto;
+	margin: 30px auto 0;
 }
 .col-md-3{
 	/*width: 22%;*/
@@ -88,7 +88,7 @@ body{
 	color: #ddd;
 	background-color: #55f;
 	border-radius: 5px;
-	margin-top: 2em;
+	margin-top: 0;
 	padding: 8px 13px;
 	width: max-content;
 	transition: .3s;
@@ -136,4 +136,8 @@ body{
 	background: #888;
 	color: #fff;
 	border-radius: 4px;
+}
+
+.bottom{
+	margin-bottom: 2em;
 }
