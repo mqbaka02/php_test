@@ -4,7 +4,7 @@ require '../vendor/autoload.php';
 define('DEBUG_TIME', microtime(true));
 
 
-//whoops
+//whoops errors
 $whoops= new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
