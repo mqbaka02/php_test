@@ -4,7 +4,7 @@ use \PDO;
 
 class Connection {
 	public static function getPDO() : PDO{
-		return new PDO('mysql:dbname=tutoblog;host=localhost', 'root', 'root',[
+		return new PDO('mysql:dbname=tutoblog;host=localhost', 'root', '',[
 			PDO::ATTR_ERRMODE=> PDO::ERRMODE_EXCEPTION
 		]);
 	}

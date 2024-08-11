@@ -1,9 +1,9 @@
 {
     "require": {
-        "altorouter/altorouter": "1.2.0",
-        "symfony/var-dumper": "^5.4",
-        "filp/whoops": "2.3.1",
-        "fzaninotto/faker": "1.8.0"
+        "altorouter/altorouter": "*",
+        "symfony/var-dumper": "*",
+        "filp/whoops": "*",
+        "fzaninotto/faker": "*"
     },
     "autoload": {
     	"psr-4": {
