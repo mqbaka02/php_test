@@ -17,6 +17,10 @@ body{
 
 }
 
+h1{
+	margin-top: .8em;
+}
+
 .pd20{
 	padding: 20px var(--left_right);
 }
