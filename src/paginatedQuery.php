@@ -60,7 +60,7 @@ class PaginatedQuery {
         $plink= $link . "?page=" . ($currentPage - 1);
 
         return <<<HTML
-            <a href="{$plink}" class= 'btn prm' >&laquo; Previous page</a>";
+            <a href="{$plink}" class= 'btn prm' >&laquo; Previous page</a>
 HTML;
     }
 
@@ -72,7 +72,7 @@ HTML;
         $plink= $link . "?page=" . ($currentPage + 1);
 
         return <<<HTML
-            <a href="{$plink}" class= 'btn prm' id="nxt-pg">Next page &raquo;</a>";
+            <a href="{$plink}" class= 'btn prm' id="nxt-pg">Next page &raquo;</a>
 HTML;
     }
 
