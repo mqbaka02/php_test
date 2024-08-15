@@ -12,6 +12,22 @@ class Post {
 	private $created_at;
 	private $categories;
 
+	public function getName(): ?string {
+		return $this->name;
+	}
+	public function setName(string $new_name): self {
+		$this->name= $new_name;
+		return $this;
+	}
+
+	public function getContent(): ?string{
+		return $this->content;
+	}
+	public function setContent(string $new_content): self{
+		$this->content= $new_content;
+		return $this;
+	}
+
 	/**
 	 * @return Category[]
 	 */
@@ -22,10 +38,6 @@ class Post {
 	public function addCategory(Category $category): void {
 		$this->categories[]= $category;
 		$category->setPost($this);
-	}
-
-	public function getName(): ?string {
-		return $this->name;
 	}
 
 	public function getCreatedAt(): DateTime {

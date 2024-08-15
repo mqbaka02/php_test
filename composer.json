@@ -3,7 +3,8 @@
         "altorouter/altorouter": "*",
         "symfony/var-dumper": "*",
         "filp/whoops": "*",
-        "fzaninotto/faker": "*"
+        "fzaninotto/faker": "*",
+        "vlucas/valitron": "^1.4"
     },
     "autoload": {
     	"psr-4": {

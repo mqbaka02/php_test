@@ -193,6 +193,12 @@ table.pad1 tr td>*{
 	height: 100%;
 	background-color: var(--col);
 }
+.alert ul{
+	list-style: inside;
+}
+.alert ul li::marker{
+	color: var(--col);
+}
 .success{
 	--col: var(--scss);
 }
@@ -202,3 +208,15 @@ table.pad1 tr td>*{
 .info{
 	--col: var(--primary);
 }
+
+.form-grp{
+	display: grid;
+    grid-template-columns: 10% 88%;
+    grid-gap: 2%;
+    margin: 1em 0;
+}
+.invalid-feedback{
+	color: var(--dng);
+	font-size: .8em;
+}
+

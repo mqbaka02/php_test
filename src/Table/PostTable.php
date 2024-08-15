@@ -46,4 +46,15 @@ class PostTable extends Table{
             throw new \Exception("Can't delete $id from the table {$this->table}.");
         }
     }
+
+    public function update(Post $post){
+        $query= $this->pdo->prepare("UPDATE " . $this->table . " SET name= :name WHERE id= :id");
+        $ok= $query->execute([
+            'id'=> $post->getID(),
+            'name'=> $post->getName()
+        ]);
+        if($ok=== false){
+            throw new \Exception("Can't delete $id from the table {$this->table}.");
+        }
+    }
 }
