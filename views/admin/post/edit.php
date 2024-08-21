@@ -2,6 +2,7 @@
 use App\Connection;
 use App\Table\PostTable;
 use App\Validator;
+use App\HTML\Form;
 // use Valitron\Validator;
 
 $pdo= Connection::getPDO();
@@ -13,8 +14,9 @@ $errors= [];
 
 if(!empty($_POST)){
     $validator= new Validator($_POST);
-    $validator->rule('required', 'name');
-    $validator->rule('lengthBetween', 'name',3, 200);
+    $validator->rule('required', ['name', 'slug']);
+    $validator->rule('lengthBetween', ['name', 'slug'],3, 200);
+    $validator->rule('regex', 'name', '/^[a-zA-Z\p{P}\s]+$/u');
 
     // if(empty($_POST['name'])){
     //     $errors['name'][]= "Title cannot be empty.";
@@ -26,8 +28,8 @@ if(!empty($_POST)){
     // if(empty($errors)){
     if($validator->validate()){
         $post
-            ->setName($_POST['name']);
-            // ->setContent($_POST['content']);
+            ->setName($_POST['name'])
+            ->setContent($_POST['content']);
         $postTable->update($post);
         $success= true;
     } else {
@@ -37,6 +39,8 @@ if(!empty($_POST)){
 }
 
 $title= $post->getName() . ": Edit post";
+
+$form= new Form($post, $errors);
 ?>
 
 <?php if($success=== true): ?>
@@ -49,8 +53,10 @@ $title= $post->getName() . ": Edit post";
     <div class="alert failure">
         Please correct the mistakes before proceding.
         <ul>
-            <?php foreach($errors['name'] as $error): ?>
-                <li><?= $error ?></li>
+            <?php foreach($errors as $k=> $error): ?>
+                <?php foreach ($error as $err) : ?>
+                    <li><?= 'The parameter ' . $k . ' ' . $err ?></li>
+                <?php endforeach ?>
             <?php endforeach ?>
         </ul>
     </div>
@@ -58,16 +64,10 @@ $title= $post->getName() . ": Edit post";
 
 <h1>Edit post<br/>#<?= $params['id'] ?> <?= $post->getName() ?></h1>
 
-<form action="" method="post">
-<div class="form-grp">
-    <label for="name">Title</label>
-    <input type="text" class="form-ctrl" name="name" value="<?= (!empty($_POST['name']))? $_POST['name'] : $post->getName() ?>" >
-    <?php if(isset($errors['name'])): ?>
-        <div class="invalid-feedback">
-            Some mistakes
-        </div>
-    <?php endif ?>
-</div>
+<form action="" method="POST">
+    <?= $form->input('name', 'Title'); ?>
+    <?= $form->input('slug', 'URL'); ?>
+    <?= $form->textarea('content', 'Content'); ?>
 
-<button class="btn prm">Save</button>
+    <button class="btn prm">Save</button>
 </form>

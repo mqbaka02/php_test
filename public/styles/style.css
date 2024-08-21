@@ -57,6 +57,10 @@ h1{
 .footer{
 	margin-top: auto;
 }
+.container{
+	max-width: 90%;
+	margin: 0 auto;
+}
 .row{
 	display: flex;
 	flex-direction: row;
@@ -205,16 +209,30 @@ table.pad1 tr td>*{
 	--col: var(--primary);
 }
 
+input{
+	padding: .5em 1em;
+}
 .form-grp{
 	display: grid;
     grid-template-columns: 10% 88%;
     grid-gap: 2%;
-    margin: 1em 0;
+    margin: 1em auto;
+	align-items: center;
 }
 .invalid-feedback{
 	color: var(--dng);
 	font-size: .8em;
 }
+
+input.is-invalid{
+	border: 1px var(--dng) solid;
+	border-radius: 3px;
+}
+/* input.form-ctrl:focus{
+	outline: none;
+	border: 1px solid #000;
+	border-radius: 3px;
+} */
 
 @media only screen and (max-width: 950px){
 	.col-md-3 {
