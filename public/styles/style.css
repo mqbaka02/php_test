@@ -78,10 +78,6 @@ h1{
 	/*cursor: pointer;*/
 	transition: .3s;
 }
-/* .card:hover{
-	/*color: #ddd;
-	background-color: #444;
-} */
 .card-title{
 	font-weight: 800;
 	margin-bottom: 0;
@@ -220,3 +216,13 @@ table.pad1 tr td>*{
 	font-size: .8em;
 }
 
+@media only screen and (max-width: 950px){
+	.col-md-3 {
+		width: calc(97% / 3);
+	}
+}
+@media only screen and (max-width: 680px){
+	.col-md-3 {
+		width: calc(97% / 2);
+	}
+}
