@@ -30,17 +30,20 @@ HTML;
 HTML;
     }
 
-    private function getValue(string $key) {
+    private function getValue(string $key): string {
         if(is_array($this->data)){
             return $this->data[$key] ?? null;
         }
-        $method= 'get' . ucfirst($key);
-        return $this->data->$method();
+        $method= 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+        $value= $this->data->$method();
+        if ($value instanceof \DateTimeInterface){
+            return $value->format("Y-m-d H:i:s");
+        }
+        return $value;
     }
 
     private function getInputClass(string $key){
         $input_class= 'form-ctrl';
-        $invalid_feedback= '';
         if(isset($this->errors[$key])){
             $input_class .= ' ' . 'is-invalid';
         }

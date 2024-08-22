@@ -18,14 +18,6 @@ if(!empty($_POST)){
     $validator->rule('lengthBetween', ['name', 'slug'],3, 200);
     $validator->rule('regex', 'name', '/^[a-zA-Z\p{P}\s]+$/u');
 
-    // if(empty($_POST['name'])){
-    //     $errors['name'][]= "Title cannot be empty.";
-    // }
-    // if(mb_strlen($_POST['name'])<= 3){
-    //     $errors['name'][]= "Title is too short. Please add more than 3 letters.";
-    // }
-
-    // if(empty($errors)){
     if($validator->validate()){
         $post
             ->setName($_POST['name'])
@@ -68,6 +60,7 @@ $form= new Form($post, $errors);
     <?= $form->input('name', 'Title'); ?>
     <?= $form->input('slug', 'URL'); ?>
     <?= $form->textarea('content', 'Content'); ?>
+    <?= $form->input('created_at', 'Creation date'); ?>
 
     <button class="btn prm">Save</button>
 </form>
