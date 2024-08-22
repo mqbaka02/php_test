@@ -2,8 +2,8 @@
 use App\Connection;
 use App\Table\PostTable;
 use App\Validator;
+use App\Validators\PostValidator;
 use App\HTML\Form;
-// use Valitron\Validator;
 
 $pdo= Connection::getPDO();
 $postTable= new PostTable($pdo);
@@ -13,10 +13,7 @@ $success= false;
 $errors= [];
 
 if(!empty($_POST)){
-    $validator= new Validator($_POST);
-    $validator->rule('required', ['name', 'slug']);
-    $validator->rule('lengthBetween', ['name', 'slug'],3, 200);
-    $validator->rule('regex', 'name', '/^[a-zA-Z\p{P}\s]+$/u');
+    $validator= new PostValidator($_POST, $postTable, $post->getID());
 
     if($validator->validate()){
         $post
@@ -49,7 +46,7 @@ $form= new Form($post, $errors);
         <ul>
             <?php foreach($errors as $k=> $error): ?>
                 <?php foreach ($error as $err) : ?>
-                    <li><?= 'The parameter ' . $k . ' ' . $err ?></li>
+                    <li><?= 'On ' . $k . ': ' . $err ?></li>
                 <?php endforeach ?>
             <?php endforeach ?>
         </ul>

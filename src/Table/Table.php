@@ -31,4 +31,21 @@ abstract class Table{
         }
         return $result;
     }
+
+    /**
+     * Checks the existence of a value in the database
+     * @param string $field field to search for
+     * @param string $value value of the field
+     */
+    public function exists(string $field, $value, ?int $except= null): bool {
+        $sql= "SELECT COUNT(id) FROM {$this->table} WHERE $field = ?";
+        $params= [$value];
+        if($except!== null){
+            $sql .= " AND id!= ?";
+            $params[]= $except;
+        }
+        $query= $this->pdo->prepare($sql);
+        $query->execute($params);
+        return (int)($query->fetch(PDO::FETCH_NUM)[0] > 0);
+    }
 }

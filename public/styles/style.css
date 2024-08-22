@@ -233,6 +233,10 @@ input.is-invalid{
 	border: 1px solid #000;
 	border-radius: 3px;
 } */
+ textarea{
+	padding: .5em 1em;
+	height: 200px;
+ }
 
 @media only screen and (max-width: 950px){
 	.col-md-3 {
