@@ -27,6 +27,14 @@ class Post {
 		$this->content= $new_content;
 		return $this;
 	}
+	public function setSlug(string $new_slug): self{
+		$this->slug= $new_slug;
+		return $this;
+	}
+	public function setCreatedAt(string $date): self{
+		$this->created_at= $date;
+		return $this;
+	}
 
 	/**
 	 * @return Category[]

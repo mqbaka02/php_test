@@ -21,7 +21,9 @@ if(!empty($_POST)){
     if($validator->validate()){
         $post
             ->setName($_POST['name'])
-            ->setContent($_POST['content']);
+            ->setContent($_POST['content'])
+            ->setSlug($_POST['slug'])
+            ->setCreatedAt($_POST['created_at']);
         $postTable->update($post);
         $success= true;
     } else {
