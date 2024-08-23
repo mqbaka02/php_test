@@ -2,6 +2,7 @@
 use App\Connection;
 use App\Table\PostTable;
 use App\Validator;
+use App\ObjectHelper;
 use App\Validators\PostValidator;
 use App\HTML\Form;
 
@@ -15,12 +16,13 @@ $errors= [];
 if(!empty($_POST)){
     $validator= new PostValidator($_POST, $postTable, $post->getID());
 
-    if($validator->validate()){
-        $post
-            ->setName($_POST['name'])
-            ->setContent($_POST['content'])
-            ->setSlug($_POST['slug'])
-            ->setCreatedAt($_POST['created_at']);
+    if($validator->validate()){//hydrate only if validation passed
+        ObjectHelper::hydrate($post, $_POST, ['name', 'content', 'slug', 'created_at']);
+        // $post
+        //     ->setName($_POST['name'])
+        //     ->setContent($_POST['content'])
+        //     ->setSlug($_POST['slug'])
+        //     ->setCreatedAt($_POST['created_at']);
         $postTable->update($post);
         $success= true;
     } else {
