@@ -39,39 +39,27 @@ class PostTable extends Table{
         return [$posts, $paginatedQuery];
     }
 
-    public function delete(int $id): void {
-        $query= $this->pdo->prepare("DELETE FROM " . $this->table . " WHERE id= ?");
-        $ok= $query->execute([$id]);
-        if($ok=== false){
-            throw new \Exception("Can't delete $id from the table {$this->table}.");
-        }
-    }
-
-    public function update(Post $post){
+    public function updatePost(Post $post){
         $query= $this->pdo->prepare("UPDATE " . $this->table . " SET name= :name, slug= :slug, created_at= :created, content= :content WHERE id= :id");
-        $ok= $query->execute([
+        $ok= $this->update([
             'id'=> $post->getID(),
             'name'=> $post->getName(),
             'slug'=> $post->getSlug(),
             'content'=> $post->getContent(),
             'created'=> $post->getCreatedAt()->format('Y-m-d H:i:s')
-        ]);
+        ], $post->getID());
         if($ok=== false){
             throw new \Exception("Can't delete $id from the table {$this->table}.");
         }
     }
 
-    public function create(Post $post){
-        $query= $this->pdo->prepare("INSERT INTO  " . $this->table . " SET name= :name, slug= :slug, created_at= :created, content= :content");
-        $ok= $query->execute([
+    public function createPost(Post $post){
+        $id= $this->create([
             'name'=> $post->getName(),
             'slug'=> $post->getSlug(),
             'content'=> $post->getContent(),
             'created'=> $post->getCreatedAt()->format('Y-m-d H:i:s')
         ]);
-        if($ok=== false){
-            throw new \Exception("Can't create new entry in the table {$this->table}.");
-        }
-        $post->setID($this->pdo->lastInsertID());
+        $post->setID($id);
     }
 }

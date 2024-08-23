@@ -1,8 +1,8 @@
 <?php
 use App\Connection;
 use App\Table\PostTable;
-use App\Auth;
 
+use App\Auth;
 Auth::check();
 
 // $router->layout= "admin/layout/default";

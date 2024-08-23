@@ -51,6 +51,8 @@ h1{
 .navbar-nav{
 	margin-left: auto;
 	list-style-type: none;
+	display: flex;
+	gap: 2em;
 }
 .navbar-nav .nav-item{
 	opacity: .5;

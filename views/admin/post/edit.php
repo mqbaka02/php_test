@@ -5,6 +5,9 @@ use App\ObjectHelper;
 use App\Validators\PostValidator;
 use App\HTML\Form;
 
+use App\Auth;
+Auth::check();
+
 $pdo= Connection::getPDO();
 $postTable= new PostTable($pdo);
 $post= $postTable->find($params['id']);

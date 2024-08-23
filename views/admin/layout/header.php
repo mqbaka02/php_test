@@ -14,6 +14,7 @@
 		<a href="/" class="nav-brand">The Site</a>
         <ul class="navbar-nav">
             <li class="nav-item"><a href="<?= $router->url('admin_posts') ?>" class="nav-link">Posts</a></li>
+            <li class="nav-item"><a href="<?= $router->url('admin_categories') ?>" class="nav-link">Categories</a></li>
         </ul>
 	</nav>
 	<div class="container">

@@ -6,6 +6,9 @@ use App\Validators\PostValidator;
 use App\HTML\Form;
 use App\Model\Post;
 
+use App\Auth;
+Auth::check();
+
 $errors= [];
 $post= new Post();
 $post->setCreatedAt(date('Y-m-d H:i:s'));

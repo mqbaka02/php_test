@@ -1,27 +1,32 @@
 <?php
 use App\Connection;
-use App\Table\PostTable;
+use App\Table\CategoryTable;
 use App\ObjectHelper;
-use App\Validators\PostValidator;
+use App\Validators\CategoryValidator;
 use App\HTML\Form;
-use App\Model\Post;
+use App\Model\Category;
+
+use App\Auth;
+Auth::check();
 
 $errors= [];
-$post= new Post();
-$post->setCreatedAt(date('Y-m-d H:i:s'));
+$item= new Category();
 
 if(!empty($_POST)){
     $pdo= Connection::getPDO();
-    $postTable= new PostTable($pdo);
+    $categoryTable= new CategoryTable($pdo);
 
-    $validator= new PostValidator($_POST, $postTable, $post->getID());
+    $validator= new CategoryValidator($_POST, $categoryTable, $item->getID());
 
     if($validator->validate()){//hydrate only if validation passed
-        ObjectHelper::hydrate($post, $_POST, ['name', 'content', 'slug', 'created_at']);
+        ObjectHelper::hydrate($item, $_POST, ['name', 'slug']);
 
-        $postTable->create($post);
+        $categoryTable->create([
+            'name'=> $item->getName(),
+            'slug'=> $item->getSlug()
+        ]);
 
-        header('Location: ' . $router->url('admin_post', ['id'=> $post->getID()]) . '?creation_success=1');
+        header('Location: ' . $router->url('admin_categories') . '?creation_success=1');
         exit();
     } else {
         // dd($validator->errors());
@@ -31,7 +36,7 @@ if(!empty($_POST)){
 
 $title= "Create a post";
 
-$form= new Form($post, $errors);
+$form= new Form($item, $errors);
 ?>
 
 <?php if(!empty($errors)): ?>
@@ -47,6 +52,6 @@ $form= new Form($post, $errors);
     </div>
 <?php endif ?>
 
-<h1>Create new post</h1>
+<h1>Create new category</h1>
 <?php $submit_text= "Create" ?>
 <?php require('_form.php') ?>
