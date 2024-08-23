@@ -43,6 +43,23 @@ h1{
 	color: var(--white);
 	text-decoration: none;
 }
+
+.lg{
+	display: flex;
+}
+
+.navbar-nav{
+	margin-left: auto;
+	list-style-type: none;
+}
+.navbar-nav .nav-item{
+	opacity: .5;
+	transition: .3s;
+}
+.navbar-nav .nav-item:hover{
+	opacity: 1;
+}
+
 .container{
 	margin: 0 auto;
 	max-width: var(--container-m-width);
