@@ -21,7 +21,7 @@ $pdo= Connection::getPDO();
     <thead>
         <th>ID</th>
         <th>Title</th>
-        <th>Actions</th>
+        <th><a href="<?= $router->url('admin_post_new') ?>" class="btn prm">Create new</a></th>
     </thead>
     <tbody>
         <?php foreach($posts as $post): ?>
