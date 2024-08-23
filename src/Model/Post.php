@@ -71,4 +71,8 @@ class Post {
 	public function getID(): ?int {
 		return $this->id;
 	}
+	public function setID(int $id): self {
+		$this->id= $id;
+		return $this;
+	}
 }

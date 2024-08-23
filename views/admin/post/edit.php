@@ -1,7 +1,6 @@
 <?php
 use App\Connection;
 use App\Table\PostTable;
-use App\Validator;
 use App\ObjectHelper;
 use App\Validators\PostValidator;
 use App\HTML\Form;
@@ -17,12 +16,9 @@ if(!empty($_POST)){
     $validator= new PostValidator($_POST, $postTable, $post->getID());
 
     if($validator->validate()){//hydrate only if validation passed
+        
         ObjectHelper::hydrate($post, $_POST, ['name', 'content', 'slug', 'created_at']);
-        // $post
-        //     ->setName($_POST['name'])
-        //     ->setContent($_POST['content'])
-        //     ->setSlug($_POST['slug'])
-        //     ->setCreatedAt($_POST['created_at']);
+
         $postTable->update($post);
         $success= true;
     } else {
@@ -57,11 +53,5 @@ $form= new Form($post, $errors);
 
 <h1>Edit post<br/>#<?= $params['id'] ?> <?= $post->getName() ?></h1>
 
-<form action="" method="POST">
-    <?= $form->input('name', 'Title'); ?>
-    <?= $form->input('slug', 'URL'); ?>
-    <?= $form->textarea('content', 'Content'); ?>
-    <?= $form->input('created_at', 'Creation date'); ?>
-
-    <button class="btn prm">Save</button>
-</form>
+<?php $submit_text= "Save" ?>
+<?php require('_form.php') ?>

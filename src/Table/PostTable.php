@@ -60,4 +60,18 @@ class PostTable extends Table{
             throw new \Exception("Can't delete $id from the table {$this->table}.");
         }
     }
+
+    public function create(Post $post){
+        $query= $this->pdo->prepare("INSERT INTO  " . $this->table . " SET name= :name, slug= :slug, created_at= :created, content= :content");
+        $ok= $query->execute([
+            'name'=> $post->getName(),
+            'slug'=> $post->getSlug(),
+            'content'=> $post->getContent(),
+            'created'=> $post->getCreatedAt()->format('Y-m-d H:i:s')
+        ]);
+        if($ok=== false){
+            throw new \Exception("Can't create new entry in the table {$this->table}.");
+        }
+        $post->setID($this->pdo->lastInsertID());
+    }
 }
