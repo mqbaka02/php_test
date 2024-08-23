@@ -51,7 +51,7 @@ abstract class Table{
 
     public function all(): array{
         $sql=  "SELECT * FROM {$this->table}";
-        $this->pdo->query($sql, PDO::FETCH_CLASS, $this->class)->fetchAll();
+        return $this->pdo->query($sql, PDO::FETCH_CLASS, $this->class)->fetchAll();
     }
 
     public function delete(int $id) {
@@ -75,12 +75,12 @@ abstract class Table{
         return (int)($this->pdo->lastInsertID());
     }
 
-    public function update(Post $post){
+    public function update(array $data, int $id){
         $sqlFields= [];
         foreach($data as $key=> $value){
             $sqlFields[]= "$key = :$key";
         }
-        $query= $this->pdo->prepare("INSERT INTO {$this->table} SET " . implode(', ', $sqlFields) . " WHERE id= :id");
+        $query= $this->pdo->prepare("UPDATE {$this->table} SET " . implode(', ', $sqlFields) . " WHERE id= :id");
         $ok= $query->execute(array_merge($data, ['id'=> $id]));
         if($ok=== false){
             throw new \Exception("Can't write changes in the table {$this->table}.");

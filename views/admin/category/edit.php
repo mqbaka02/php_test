@@ -1,6 +1,6 @@
 <?php
 use App\Connection;
-use App\Table\PostTable;
+use App\Table\CategoryTable;
 use App\ObjectHelper;
 use App\Validators\CategoryValidator;
 use App\HTML\Form;

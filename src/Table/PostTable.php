@@ -40,13 +40,12 @@ class PostTable extends Table{
     }
 
     public function updatePost(Post $post){
-        $query= $this->pdo->prepare("UPDATE " . $this->table . " SET name= :name, slug= :slug, created_at= :created, content= :content WHERE id= :id");
         $ok= $this->update([
             'id'=> $post->getID(),
             'name'=> $post->getName(),
             'slug'=> $post->getSlug(),
             'content'=> $post->getContent(),
-            'created'=> $post->getCreatedAt()->format('Y-m-d H:i:s')
+            'created_at'=> $post->getCreatedAt()->format('Y-m-d H:i:s')
         ], $post->getID());
         if($ok=== false){
             throw new \Exception("Can't delete $id from the table {$this->table}.");
@@ -58,7 +57,7 @@ class PostTable extends Table{
             'name'=> $post->getName(),
             'slug'=> $post->getSlug(),
             'content'=> $post->getContent(),
-            'created'=> $post->getCreatedAt()->format('Y-m-d H:i:s')
+            'created_at'=> $post->getCreatedAt()->format('Y-m-d H:i:s')
         ]);
         $post->setID($id);
     }

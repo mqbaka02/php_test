@@ -14,6 +14,7 @@ class Category {
 	}
 	public function setID(int $id): self {
 		$this->id= $id;
+		return $this;
 	}
 
 	public function setPost(Post $post): void{
@@ -23,8 +24,9 @@ class Category {
 	public function getName(): ?string {
 		return $this->name;
 	}
-	public function setName(string $slug): self {
+	public function setName(string $name): self {
 		$this->name= $name;
+		return $this;
 	}
 
 	public function getSlug(): ?string {
@@ -32,6 +34,7 @@ class Category {
 	}
 	public function setSlug(string $slug): self {
 		$this->slug= $slug;
+		return $this;
 	}
 
 	public function getPostId(): ?int {

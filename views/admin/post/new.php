@@ -22,7 +22,7 @@ if(!empty($_POST)){
     if($validator->validate()){//hydrate only if validation passed
         ObjectHelper::hydrate($post, $_POST, ['name', 'content', 'slug', 'created_at']);
 
-        $postTable->create($post);
+        $postTable->createPost($post);
 
         header('Location: ' . $router->url('admin_post', ['id'=> $post->getID()]) . '?creation_success=1');
         exit();

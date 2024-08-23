@@ -22,7 +22,7 @@ if(!empty($_POST)){
         
         ObjectHelper::hydrate($post, $_POST, ['name', 'content', 'slug', 'created_at']);
 
-        $postTable->update($post);
+        $postTable->updatePost($post);
         $success= true;
     } else {
         // dd($validator->errors());
