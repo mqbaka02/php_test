@@ -21,7 +21,7 @@ if(!empty($_POST)){
 
         $postTable->create($post);
 
-        header('Location: ' . $router->url('admin_post', [$post->getID()]) . '?creation_success=1');
+        header('Location: ' . $router->url('admin_post', ['id'=> $post->getID()]) . '?creation_success=1');
         exit();
     } else {
         // dd($validator->errors());

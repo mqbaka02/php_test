@@ -38,6 +38,12 @@ $form= new Form($post, $errors);
     </div>
 <?php endif ?>
 
+<?php if(isset($_GET['creation_success'])): ?>
+    <div class="alert success">
+        Post created successfully.
+    </div>
+<?php endif ?>
+
 <?php if(!empty($errors)): ?>
     <div class="alert failure">
         Please correct the mistakes before proceding.
