@@ -16,6 +16,11 @@ $items= (new CategoryTable($pdo))->all();
         The entry has been removed successfully.
     </div>
 <?php endif ?>
+<?php if(isset($_GET['creation_success'])): ?>
+    <div class="alert success">
+        The entry has been created successfully.
+    </div>
+<?php endif ?>
 
 <table class="striped pad1">
     <thead>
