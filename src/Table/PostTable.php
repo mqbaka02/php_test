@@ -1,10 +1,9 @@
 <?php
 namespace App\Table;
+
 use App\Table\CategoryTable;
 use App\PaginatedQuery;
 use App\Model\Post;
-use App\Model\Category;
-use \PDO;
 
 class PostTable extends Table{
 

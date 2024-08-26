@@ -15,6 +15,16 @@
         <ul class="navbar-nav">
             <li class="nav-item"><a href="<?= $router->url('admin_posts') ?>" class="nav-link">Posts</a></li>
             <li class="nav-item"><a href="<?= $router->url('admin_categories') ?>" class="nav-link">Categories</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" onclick="thingie()">Log out</a></li>
         </ul>
 	</nav>
+	<form action="<?= $router->url('logout') ?>" method="post" style="display:none" id="logoutform">
+		<button type="submit">Log out</button>
+	</form>
+	<script>
+		function thingie(){
+			var logoutform= document.querySelector('#logoutform');
+			logoutform.submit();
+		}
+	</script>
 	<div class="container">

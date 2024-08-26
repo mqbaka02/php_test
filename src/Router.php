@@ -1,5 +1,8 @@
 <?php
 namespace App;
+
+use App\Security\ForbiddenException;
+
 require '../vendor/autoload.php';
 
 class Router {
@@ -40,15 +43,30 @@ class Router {
 
 	public function run() {
 		$match= $this->router->match();
-		$view= $match['target'];
-		$params= $match['params'];
+		// dd($match);
+		if($match){
+			$view= $match['target'];
+			$params= $match['params'];
+		} else {
+			$view= 'e404';
+		}
 		$router= $this;
 		$isAdmin= strpos($view, 'admin')!== false;
 		$this->layout= $isAdmin? "admin/layout/default" : "layout/default";
-		ob_start();
-		require $this->view_path . DIRECTORY_SEPARATOR . $view . '.php';
-		$content= ob_get_clean();
-		require $this->view_path . DIRECTORY_SEPARATOR . $this->layout . '.php';
+
+		// if($view=== null){
+		// 	$view= 'e404';
+		// }
+
+		try{
+			ob_start();
+			require $this->view_path . DIRECTORY_SEPARATOR . $view . '.php';
+			$content= ob_get_clean();
+			require $this->view_path . DIRECTORY_SEPARATOR . $this->layout . '.php';
+		} catch (ForbiddenException $ex){
+			header('Location: ' . $this->url('login') . '?forbidden=1');
+			exit();
+		}
 		return $this;
 	}
 }

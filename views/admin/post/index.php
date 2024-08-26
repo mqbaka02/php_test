@@ -19,6 +19,8 @@ $pdo= Connection::getPDO();
     </div>
 <?php endif ?>
 
+<h1>All the posts</h1>
+
 <table class="striped pad1">
     <thead>
         <th>ID</th>

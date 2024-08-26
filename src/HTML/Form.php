@@ -10,13 +10,18 @@ class Form {
         $this->errors= $errors;
     }
 
-    public function input(string $key, string $label): string {
+    public function input(string $key, string $label, ?bool $required= true): string {
         $value= $this->getValue($key);
+        // dump($this->data);
         $type= ($key=== "password")? "password" : "text";
+        if ($key=== "password"){
+            $value= "";
+        }
+        $req= $required? "required" : "";
         return <<<HTML
         <div class="form-grp">
             <label for="field{$key}">{$label}</label>
-            <input type= {$type} id="field{$key}" class="{$this->getInputClass($key)}" name="{$key}" value="{$value}" required>
+            <input type= {$type} id="field{$key}" class="{$this->getInputClass($key)}" name="{$key}" value="{$value}" {$req}>
         </div>
 HTML;
     }
